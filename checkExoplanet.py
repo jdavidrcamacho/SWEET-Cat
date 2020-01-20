@@ -142,7 +142,7 @@ class Update:
             writeFile('names.txt', '\n'.join(NewStars))
             updated=False
         else:
-            puts(colored.clean('*** No new updates available. ***'))
+            puts(colored.clean('*** No new updates available ***'))
             updated=True
         # removing planets that are not in Exoplanet.eu anymore    
         NewStars = []
@@ -164,10 +164,10 @@ class Update:
             puts(colored.green(' -> ' + str(Nstars) + " exoplanet has to be removed!\n"))
             print('\n'.join(NewStars))
         else:
-            puts(colored.clean('    No planet to remove.'))
+            puts(colored.clean(' -> No planet to remove!'))
             if updated:        
-                puts(colored.clean('    SWEET-Cat is up to date'))
-                puts(colored.green('    Great job :)'))
+                puts(colored.clean('*** SWEET-Cat is up to date ***'))
+                puts(colored.green('    Yey \(^-^)/ '))
 
 
 if __name__ == '__main__':

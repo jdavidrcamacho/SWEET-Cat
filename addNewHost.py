@@ -345,7 +345,7 @@ if __name__ == '__main__':
                             names.write(j)
                 names.close()
                 print('')
-                print('~~~~~~~~~~~~~~~~~~~~~~~~~~~~')
+                print('---------------------------')
             else:
-                print('Bye (^_^)')
+                print('Bye then (¬_¬)')
                 break
