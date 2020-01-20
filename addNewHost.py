@@ -55,17 +55,13 @@ def torres(name, teff=False, logg=False, feh=False):
 
 
 def variable_assignment(digits):
-    try:
-        if digits>0:
-            x = '%.2f' % round(input('> '), digits)
-        else:
-            x = '%d' % round(input('> '), digits)
-    except SyntaxError as e:
+    """ Giving values to our stellar parameters """
+    x = input(digits)
+    if len(x) == 0:
         x = 'NULL'
     return x
 
 if __name__ == '__main__':
-    # stars = np.loadtxt('names.txt', dtype='S', delimiter='\t',usecols=(0,), )	"does not work when the file has only one line"
     with open('names.txt') as f:
         stars = f.readlines()
     f.close()
@@ -182,17 +178,18 @@ if __name__ == '__main__':
                         Tefferr = variable_assignment(0)
                 # The log g
                 puts('The ' + colored.yellow('logg'))
-                logg = variable_assignment(2)
+                logg = variable_assignment("> ")
                 puts('The error on ' + colored.yellow('logg'))
-                loggerr = variable_assignment(2)
+                loggerr = variable_assignment("> ")
+                print('this -<', logg)
                 # The mass
                 puts(colored.magenta('Calculating the mass...'))
                 M, Merr = torres(name, [Teff, Tefferr], [logg, loggerr], feh=[FeH, Ferr])
                 # The microturbulence number
                 puts('The '+colored.yellow('microturbulence'))
-                vt = variable_assignment(2)
+                vt = variable_assignment("> ")
                 puts('The error on '+colored.yellow('microturbulence'))
-                vterr = variable_assignment(2)
+                vterr = variable_assignment("> ")
                 # Author and link to ADS
                 puts('Who is the '+colored.yellow('author?'))
                 author = input('> ').strip()
@@ -229,7 +226,7 @@ if __name__ == '__main__':
                         else:
                             print('\nV magnitude = '+str(V))
                             puts('The error on ' + colored.yellow('V magnitude'))
-                            Verr = variable_assignment(2)
+                            Verr = variable_assignment("> ")
                             if Verr == '':
                                 Verr = 'NULL'
                     else:
@@ -237,12 +234,12 @@ if __name__ == '__main__':
                             V = round(float(V_exo), 2)
                         else:    
                             puts('The ' + colored.yellow('V magnitude'))
-                            V = variable_assignment(2)
+                            V = variable_assignment("> ")
                             if V == '':
                                 V = 'NULL'
                         print('\nV magnitude = '+str(V))
                         puts('The error on ' + colored.yellow('V magnitude'))
-                        Verr = variable_assignment(2)
+                        Verr = variable_assignment("> ")
                         if Verr == '':
                             Verr = 'NULL'
                     # The parallax
