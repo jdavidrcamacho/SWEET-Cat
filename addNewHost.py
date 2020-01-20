@@ -40,7 +40,6 @@ def torres(name, teff=False, logg=False, feh=False):
     Calculates the mass and error from Torres. See source for more information
     """
     from TorresMass import massTorres
-
     T, Terr = teff
     L, Lerr = logg
     F, Ferr = feh
@@ -108,7 +107,7 @@ if __name__ == '__main__':
         # if the star is found in the exoplanet.eu
         if next:
             print('')
-            var = raw_input('Continue? [Y/N]: ')
+            var = input('Continue? [Y/N]: ')
             if var.upper().strip()=='Y':
                 # Get RA and dec
                 ra, dec = float(exo.ra.values[0]), float(exo.dec.values[0])
@@ -196,16 +195,16 @@ if __name__ == '__main__':
                 vterr = variable_assignment(2)
                 # Author and link to ADS
                 puts('Who is the '+colored.yellow('author?'))
-                author = raw_input('> ').strip()
+                author = input('> ').strip()
                 if author == '':
                     author = empty                
                 puts('Link to article ('+colored.yellow('ADS')+')')
-                link = raw_input('> ').strip()
+                link = input('> ').strip()
                 if link == '':
                     link = empty
                 # Source flag
                 puts(colored.yellow('Source flag'))
-                source = raw_input('(0/1) > ')
+                source = input('(0/1) > ')
                 if source == '':
                     source = '0'
                 V_exo=exo.mag_v.values[0]
@@ -282,13 +281,13 @@ if __name__ == '__main__':
                     else:                    
                         puts('Any '+colored.yellow('comments'))
                         puts('E.g. if we have a M dwarf...')
-                        comment = raw_input('> ')
+                        comment = input('> ')
                         if comment == '':
                             comment = 'NULL'   
                 except:
                     # The HD number
                     puts('The '+colored.yellow('HD number'))
-                    HD = raw_input('> ')
+                    HD = input('> ')
                     if HD == '':
                         HD = 'NULL' 
                     # The V magnitude
@@ -327,7 +326,7 @@ if __name__ == '__main__':
                     # Comments
                     puts('Any '+colored.yellow('comments'))
                     puts('E.g. if we have a M dwarf...')
-                    comment = raw_input('> ')
+                    comment = input('> ')
                     if comment == '':
                         comment = 'NULL'
                 # Last update
@@ -351,5 +350,5 @@ if __name__ == '__main__':
                 print('')
                 print('~~~~~~~~~~~~~~~~~~~~~~~~~~~~')
             else:
-                print('Bye...')
+                print('Bye (^_^)')
                 break
