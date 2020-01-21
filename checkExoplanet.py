@@ -11,6 +11,8 @@ from astropy import units as u
 # For fun, but still useful
 from clint.textui import puts, colored
 warnings.simplefilter("ignore")
+from io import open
+from six import indexbytes
 
 
 def writeFile(fname, data):
@@ -39,7 +41,7 @@ class Update:
         if self.download:
             response = urlopen("http://exoplanet.eu/catalog/votable")
             table = response.read()
-            with open('exo.xml', 'wb') as f:
+            with open("exo.xml", "wb") as f:
                 f.write(table)
             self.xml2csv()
         df = pd.read_csv(self.fname)
@@ -69,6 +71,7 @@ class Update:
         planets = 'bcdefghijB'
         for planet in planets:
             if name.endswith(' %s' % planet):
+                
                 return name[:-2]
         #some exoplanets have .01 or .02 in the name 
         if name.endswith('.01') or name.endswith('.02') or name.endswith('.2'):
@@ -118,12 +121,14 @@ class Update:
         #We have this already, but without the ' in the name.
         print('\n*** Matching data base ***')
         NewStars = []
-        coordExo=coord.SkyCoord(ra = self.exoplanet['ra'].values,
-                                dec = self.exoplanet['dec'].values,
-                                unit = (u.deg,u.deg), frame = 'icrs')
-        coordSC=coord.SkyCoord(ra = self.coordinates['ra'].values,
-                               dec = self.coordinates['dec'].values,
-                               unit = (u.hourangle,u.deg), frame = 'icrs')
+        #from exoplanet.eu
+        coordExo = coord.SkyCoord(ra = self.exoplanet['ra'].values, 
+                                 dec = self.exoplanet['dec'].values, 
+                                 unit = (u.deg,u.deg), frame = 'icrs')
+        #from sweet-cat
+        coordSC = coord.SkyCoord(ra = self.coordinates['ra'].values, 
+                                dec = self.coordinates['dec'].values, 
+                                unit = (u.hourangle,u.deg), frame = 'icrs')
         for i, exo_name in enumerate(self.exo_names):
             new = exo_name
             tmp = new.lower().replace(' ', '').replace('-', '') 
@@ -131,11 +136,11 @@ class Update:
             ind = np.where(sep<5.)[0]
             if len(ind)==0:
                 try:
-                    # it didn't find by position but it finds by name
+                    #it didn't find by position but it finds by name
                     position = self.sc_names.index(tmp)
                 except:
                     position = -1
-                    # it didn't find by position and neither by name
+                    #it didn't find by position and neither by name
                     if (tmp not in self.blacklist):
                         NewStars.append(new)
         NewStars = sorted(list(set(NewStars)))
@@ -151,7 +156,7 @@ class Update:
         NewStars = []
         for i, scname in enumerate(self.sc_names_orig):
             sep = coordSC[i].separation(coordExo).arcsecond
-            ind=np.where(sep<5.)[0]
+            ind = np.where(sep<5.)[0]
             if len(ind)==0:
                 try:
                     #it didn't find by position but it finds by name
