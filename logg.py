@@ -1,20 +1,20 @@
-#!/usr/bin/python
-
+#!/usr/bin/env python
+# -*- coding: utf8 -*-
 import argparse
 from astropy import constants as c
 from numpy import log10
 
 
 def _parse():
-    '''Calculate the surface gravity from M and R'''
-    p = argparse.ArgumentParser(description='Calculate logg from solar M and R')
-    p.add_argument('M', help='Mass in solar units', type=float)
-    p.add_argument('R', help='Radius in solar units', type=float)
+    """ Calculate the surface gravity from M and R """
+    p = argparse.ArgumentParser(description = 'Calculate logg from solar M and R')
+    p.add_argument('M', help = 'Mass in solar units', type = float)
+    p.add_argument('R', help = 'Radius in solar units', type = float)
     return p.parse_args()
 
 
 def logg(M, R):
-    """Mass and radius in solar units"""
+    """ Mass and radius in solar units """
     G = c.G.value * 1e3
     M *= c.M_sun.value * 1e3
     R *= c.R_sun.value * 1e2
