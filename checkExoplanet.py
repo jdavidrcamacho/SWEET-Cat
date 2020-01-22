@@ -96,7 +96,7 @@ class Update:
         Transform the coordinates to degrees
         
         Parameters
-        -----
+        ----------
         idx : int
             The index of the SWEET-Cat catalogue
           
